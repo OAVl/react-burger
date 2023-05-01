@@ -2,23 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import AppHeader from "./components/app-header/app-header";
-import BurgerIngredients from "./components/burger-ingredients/burger-ingredients";
-import BurgerConstructor from "./components/burger-constructor/burger-constructor";
+import App from "./components/app/App";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <AppHeader />
-    <main className="index_container p-10">
-        <h1 className="text text_type_main-large pb-5">Соберите бургер</h1>
-        <div className="index_wrapper">
-            <BurgerIngredients />
-            <BurgerConstructor />
-        </div>
-    </main>
+      <App />
   </React.StrictMode>
 );
 

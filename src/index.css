@@ -12,17 +12,6 @@ code {
     monospace;
 }
 
-.index_container {
-  max-width: 1280px;
-  margin: 0 auto;
-}
-
-.index_wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
 .constructor-element {
   margin-right: 8px;
 }
@@ -30,4 +19,9 @@ code {
 .constructor-element_pos_top,
 .constructor-element_pos_bottom {
   margin-right: 16px;
+}
+
+a {
+  text-decoration: none;
+  color: #FFFFFF;
 }

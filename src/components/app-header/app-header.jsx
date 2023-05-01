@@ -11,21 +11,23 @@ function AppHeader() {
     return (
         <header className={`${styles.wrapper} p-4`}>
             <nav className={styles.container}>
-                <ul className={styles.list}>
-                    <li className={styles.wrapperLink}>
+                <div className={styles.list}>
+                    <a href='#' className={styles.wrapperLink}>
                         <BurgerIcon type="primary" />
                         <p className="text text_type_main-default">Конструктор</p>
-                    </li>
-                    <li className={styles.wrapperLink}>
+                    </a>
+                    <a href='#' className={styles.wrapperLink}>
                         <ListIcon type="secondary" />
                         <p className="text text_type_main-default text_color_inactive">Лента заказов</p>
-                    </li>
-                </ul>
-                <Logo />
-                <div className={styles.wrapperLink}>
+                    </a>
+                </div>
+                <a href='/'>
+                    <Logo />
+                </a>
+                <a href='#' className={styles.wrapperLink}>
                     <ProfileIcon type="secondary" />
                     <p className="text text_type_main-default text_color_inactive">Личный кабинет</p>
-                </div>
+                </a>
             </nav>
         </header>
     );

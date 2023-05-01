@@ -8,41 +8,44 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import img from '../../images/bun-02.png'
 import image from '../../images/Subtract.png'
-import PropTypes from 'prop-types';
 
 
 function BurgerConstructor() {
+
+    const { bun, otherIngredients } = {
+        bun: data.filter(item => item.type === 'bun'),
+        otherIngredients: data.filter(item => item.type !== 'bun')
+    };
+
     return (
         <section >
-            <div className={`${styles.container} mb-10`} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div className={`${styles.container} mb-10`}>
                 <ConstructorElement
                     type="top"
                     isLocked={true}
-                    text="Краторная булка N-200i (верх)"
-                    price={200}
-                    thumbnail={img}
+                    text={bun[0].name}
+                    price={bun[0].price}
+                    thumbnail={bun[0].image}
                 />
                 <div className={styles.list}>
-                {data.map((element) => {
+                {otherIngredients.map((element) => {
                     return (
-                        <div className={styles.wrapper}>
-                        <DragIcon type="primary" />
+                        <div key={element._id} className={styles.wrapper} >
+                            <DragIcon type="primary" />
                             <ConstructorElement
-                                key={element._id}
                                 text={element.name}
                                 price={element.price}
                                 thumbnail={element.image}
                             />
                         </div>
-
                     )})}
                 </div>
                 <ConstructorElement
                     type="bottom"
                     isLocked={true}
-                    text="Краторная булка N-200i (низ)"
-                    price={200}
-                    thumbnail={img}
+                    text={bun[1].name}
+                    price={bun[1].price}
+                    thumbnail={bun[1].image}
                 />
             </div>
 
@@ -58,13 +61,5 @@ function BurgerConstructor() {
         </section>
     );
 }
-
-ConstructorElement.propTypes = {
-    text: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    thumbnail: PropTypes.string.isRequired,
-    isLocked: PropTypes.any,
-    type: PropTypes.any
-};
 
 export default BurgerConstructor;
