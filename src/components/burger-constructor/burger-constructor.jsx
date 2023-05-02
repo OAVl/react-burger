@@ -13,7 +13,7 @@ import image from '../../images/Subtract.png'
 function BurgerConstructor() {
 
     const { bun, otherIngredients } = {
-        bun: data.filter(item => item.type === 'bun'),
+        bun: data.find(item => item.type === 'bun'),
         otherIngredients: data.filter(item => item.type !== 'bun')
     };
 
@@ -23,9 +23,9 @@ function BurgerConstructor() {
                 <ConstructorElement
                     type="top"
                     isLocked={true}
-                    text={bun[0].name}
-                    price={bun[0].price}
-                    thumbnail={bun[0].image}
+                    text={bun.name}
+                    price={bun.price}
+                    thumbnail={bun.image}
                 />
                 <div className={styles.list}>
                 {otherIngredients.map((element) => {
@@ -43,9 +43,9 @@ function BurgerConstructor() {
                 <ConstructorElement
                     type="bottom"
                     isLocked={true}
-                    text={bun[1].name}
-                    price={bun[1].price}
-                    thumbnail={bun[1].image}
+                    text={bun.name}
+                    price={bun.price}
+                    thumbnail={bun.image}
                 />
             </div>
 
