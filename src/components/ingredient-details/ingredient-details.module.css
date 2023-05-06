@@ -1,0 +1,15 @@
+.container {
+    padding: 40px 40px 60px;
+}
+
+.wrapper {
+    text-align: center;
+}
+
+.list {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}

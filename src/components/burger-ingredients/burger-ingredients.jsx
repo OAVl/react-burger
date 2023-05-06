@@ -1,15 +1,39 @@
-import React, { useMemo } from 'react';
+import React, {useMemo, useState } from 'react';
 import styles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import { data } from '../../utils/data'
-import IngredientsElement from "../ingredients-element/ingredientsElement";
+import IngredientsElement from "../ingredients-element/ingredients-element";
+import Modal from '../modal/modal'
+import IngredientDetails from "../ingredient-details/ingredient-details";
+import PropTypes from "prop-types";
 
-function BurgerIngredients() {
-    const [current, setCurrent] = React.useState('one');
+function BurgerIngredients({data}) {
+    const [current, setCurrent] = useState('one');
+
+    const [openModal, setOpenModal] = useState(false);
+    const [selectedElement, setSelectedElement] = useState(null);
+
+
+    const handlerCloseOverlayModal = (e) => {
+        if (e.currentTarget ===  e.target) {
+            setOpenModal(false);
+        }
+    }
+
+    const handlerCloseModal = () => {
+        setOpenModal(false);
+    }
+
+    const handlerOpen = (element) => {
+        setSelectedElement(element);
+        setOpenModal(true);
+    }
+
+
 
     const buns = useMemo(() => data.filter((item) => item.type === 'bun'), [data]);
     const mains = useMemo( () => data.filter((item) => item.type === 'main'), [data]);
     const sauces = useMemo(() => data.filter((item) => item.type === 'sauce'), [data]);
+
 
     return (
         <section>
@@ -34,7 +58,9 @@ function BurgerIngredients() {
                                         image={element.image_large}
                                         price={element.price}
                                         titleProduct={element.name}
+                                        openModal={() => handlerOpen(element)}
                                     />
+
                                 </div>
 
                             )
@@ -50,6 +76,7 @@ function BurgerIngredients() {
                                         image={element.image_large}
                                         price={element.price}
                                         titleProduct={element.name}
+                                        openModal={() => handlerOpen(element)}
                                     />
                                 </div>
                             )
@@ -65,6 +92,7 @@ function BurgerIngredients() {
                                         image={element.image_large}
                                         price={element.price}
                                         titleProduct={element.name}
+                                        openModal={() => handlerOpen(element)}
                                     />
                                 </div>
                             )
@@ -72,8 +100,15 @@ function BurgerIngredients() {
                 </div>
             </div>
 
+            <Modal onClose={handlerCloseModal} isOpen={openModal} closeTarget={handlerCloseOverlayModal}>
+                <IngredientDetails element={selectedElement} />
+            </Modal>
         </section>
     );
 }
+
+BurgerIngredients.propTypes = {
+    data: PropTypes.array
+};
 
 export default BurgerIngredients;

@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from './ingredientsElement.module.css';
+import styles from './ingredients-element.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from "prop-types";
 
-function IngredientsElement({image, price, titleProduct}) {
+function IngredientsElement({image, price, titleProduct, openModal}) {
 
     return (
-        <div className={`${styles.container} p-4`}>
+        <div className={`${styles.container} p-4`} onClick={openModal}>
             <img src={image} alt="product" />
             <div className={styles.price}>
                 <p className="text text_type_digits-default">{price}</p>
@@ -20,7 +20,8 @@ function IngredientsElement({image, price, titleProduct}) {
 IngredientsElement.propTypes = {
     image: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    titleProduct: PropTypes.string.isRequired
+    titleProduct: PropTypes.string.isRequired,
+    openModal: PropTypes.any
 };
 
 export default IngredientsElement;
