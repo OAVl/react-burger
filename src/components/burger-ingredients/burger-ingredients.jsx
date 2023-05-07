@@ -5,6 +5,7 @@ import IngredientsElement from "../ingredients-element/ingredients-element";
 import Modal from '../modal/modal'
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import PropTypes from "prop-types";
+import {data, ingredientTypes} from "../../utils/data";
 
 function BurgerIngredients({data}) {
     const [current, setCurrent] = useState('one');
@@ -27,8 +28,6 @@ function BurgerIngredients({data}) {
         setSelectedElement(element);
         setOpenModal(true);
     }
-
-
 
     const buns = useMemo(() => data.filter((item) => item.type === 'bun'), [data]);
     const mains = useMemo( () => data.filter((item) => item.type === 'main'), [data]);
@@ -100,15 +99,18 @@ function BurgerIngredients({data}) {
                 </div>
             </div>
 
-            <Modal onClose={handlerCloseModal} isOpen={openModal} closeTarget={handlerCloseOverlayModal}>
-                <IngredientDetails element={selectedElement} />
-            </Modal>
+            {openModal &&
+                <Modal onClose={handlerCloseModal} closeTarget={handlerCloseOverlayModal}>
+                    <IngredientDetails element={selectedElement} />
+                </Modal>
+            }
+
         </section>
     );
 }
-
+console.log(data)
 BurgerIngredients.propTypes = {
-    data: PropTypes.array
+    data: PropTypes.arrayOf(ingredientTypes.isRequired).isRequired
 };
 
 export default BurgerIngredients;

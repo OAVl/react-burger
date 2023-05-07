@@ -9,35 +9,36 @@ const modalRoot = document.getElementById("react-modals");
 
 
 
-const Modal = ({children, onClose, isOpen, closeTarget}) => {
+const Modal = ({children, onClose, closeTarget}) => {
     useEffect(()=>{
-        document.addEventListener("keydown", onClose);
+        const handleESCClose = (e) => {if (e.keyCode === 27) {
+            onClose();
+        }}
+        document.addEventListener("keydown", handleESCClose);
         return () => {
-            document.removeEventListener("keydown", onClose);
+            document.removeEventListener("keydown", handleESCClose);
         }
-    }, [])
-
-    if (!isOpen) return null;
+    }, [onClose])
 
         return ReactDOM.createPortal(
-
-                <ModalOverlay onClose={closeTarget} >
-                    <div className={styles.modal}>
-                        {children}
-                        <div className={styles.button} onClick={onClose}>
-                            <CloseIcon type="primary" />
-                        </div>
+             <>
+                <ModalOverlay onClose={closeTarget} />
+                <div className={styles.modal}>
+                    {children}
+                    <div className={styles.button} onClick={onClose}>
+                        <CloseIcon type="primary" />
                     </div>
-                </ModalOverlay>,
+                </div>
+             </>
+                ,
              modalRoot
         );
     }
 
 Modal.propTypes = {
-    children: PropTypes.any,
-    onClose: PropTypes.func,
-    isOpen: PropTypes.bool,
-    closeTarget: PropTypes.func
+    children: PropTypes.any.isRequired,
+    onClose: PropTypes.func.isRequired,
+    closeTarget: PropTypes.func.isRequired
 };
 
 export default Modal;

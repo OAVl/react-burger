@@ -10,6 +10,7 @@ import image from '../../images/Subtract.png'
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import PropTypes from "prop-types";
+import { ingredientTypes } from "../../utils/data";
 
 function BurgerConstructor({data}) {
 
@@ -36,7 +37,7 @@ function BurgerConstructor({data}) {
                 <ConstructorElement
                     type="top"
                     isLocked={true}
-                    text={bun.name}
+                    text={`${bun.name} (верх)`}
                     price={bun.price}
                     thumbnail={bun.image}
                 />
@@ -56,7 +57,7 @@ function BurgerConstructor({data}) {
                 <ConstructorElement
                     type="bottom"
                     isLocked={true}
-                    text={bun.name}
+                    text={`${bun.name} (низ)`}
                     price={bun.price}
                     thumbnail={bun.image}
                 />
@@ -71,9 +72,12 @@ function BurgerConstructor({data}) {
                     <Button htmlType="button" type="primary" size="medium" onClick={() => setOpenModal(true)}>
                         Оформить заказ
                     </Button>
-                    <Modal onClose={handlerCloseModal} isOpen={openModal} closeTarget={handlerCloseOverlayModal}>
-                        <OrderDetails />
-                    </Modal>
+
+                    {openModal &&
+                        <Modal onClose={handlerCloseModal} closeTarget={handlerCloseOverlayModal}>
+                            <OrderDetails />
+                        </Modal>
+                    }
                 </div>
 
             </div>
@@ -81,8 +85,10 @@ function BurgerConstructor({data}) {
     );
 }
 
+
+
 BurgerConstructor.propTypes = {
-    data: PropTypes.array
+    data: PropTypes.arrayOf(ingredientTypes.isRequired).isRequired
 };
 
 export default BurgerConstructor;
