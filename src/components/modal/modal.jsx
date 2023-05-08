@@ -6,12 +6,11 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from "prop-types";
 
 const modalRoot = document.getElementById("react-modals");
-
-
+const ESC_KEYCODE = 27;
 
 const Modal = ({children, onClose, closeTarget}) => {
     useEffect(()=>{
-        const handleESCClose = (e) => {if (e.keyCode === 27) {
+        const handleESCClose = (e) => {if (e.keyCode === ESC_KEYCODE) {
             onClose();
         }}
         document.addEventListener("keydown", handleESCClose);

@@ -108,7 +108,7 @@ function BurgerIngredients({data}) {
         </section>
     );
 }
-console.log(data)
+
 BurgerIngredients.propTypes = {
     data: PropTypes.arrayOf(ingredientTypes.isRequired).isRequired
 };

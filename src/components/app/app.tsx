@@ -3,7 +3,7 @@ import styles from './app.module.css';
 import AppHeader from "../app-header/app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
-import { checkResponse } from "../../utils/burger-api";
+import { BURGER_API_URL, checkResponse } from "../../utils/burger-api";
 
 function App() {
 
@@ -12,8 +12,6 @@ function App() {
         hasError: false,
         data: []
     })
-
-    const BURGER_API_URL = 'https://norma.nomoreparties.space/api'
 
     React.useEffect(() => {
         const getData = () => {
