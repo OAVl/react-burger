@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.constructor-element {
+  margin-right: 8px;
+}
+
+.constructor-element_pos_top,
+.constructor-element_pos_bottom {
+  margin-right: 16px;
+}
+
+a {
+  text-decoration: none;
+  color: #FFFFFF;
+}

@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+}
+
+.link {
+    text-decoration:none;
+    width: 100%;
+    height: 100%;
+    display: block;
+    color: #8585AD;
+}
+
+.link:hover,
+.link:active,
+.link:focus {
+    color: #FFFFFF;
+}
+.active {
+    color: #FFFFFF;
+    text-decoration:none;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.wrapper {
+    max-height: 716px;
+    overflow-y: scroll;
+}
+
+.wrapper::-webkit-scrollbar {
+    background: #2F2F37;
+    width: 8px;
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+    background: #8585AD;
+}
+
+.list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
