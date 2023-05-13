@@ -1,32 +1,48 @@
-import React from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import styles from './app.module.css';
 import AppHeader from "../app-header/app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import { BURGER_API_URL, checkResponse } from "../../utils/burger-api";
+import {BurgerConstructorContext, TotalPriceContext} from "../../services/appContext";
 
 function App() {
 
-    const [state, setState] = React.useState({
+    const [stateData, setStateData] = useState({
         isLoading: true,
         hasError: false,
         data: []
     })
 
-    React.useEffect(() => {
+    const totalInitialState = { total: 0 };
+
+    function reducer(state:any, action:any) {
+        switch (action.type) {
+            case "totalPlus":
+                return { total: action.payload };
+            case "totalReset":
+                return totalInitialState;
+            default:
+                throw new Error(`Wrong type of action: ${action.type}`);
+        }
+    }
+
+    const [totalPrice, setTotalPrice] = useReducer(reducer, totalInitialState, undefined);
+
+    useEffect(() => {
         const getData = () => {
             fetch(`${BURGER_API_URL}/ingredients`)
                 .then(checkResponse)
-                .then(data => setState(prevState =>({...prevState, data: data.data})))
+                .then(data => setStateData(prevState =>({...prevState, data: data.data})))
                 .catch(e => {
-                    setState(prevState => ({ ...prevState, hasError: true }))
+                    setStateData(prevState => ({ ...prevState, hasError: true }))
                 })
-                .finally(() => setState(prevState => ({...prevState, isLoading: false})))
+                .finally(() => setStateData(prevState => ({...prevState, isLoading: false})))
         }
         getData()
     }, [])
 
-    const {isLoading, hasError, data} = state
+    const {isLoading, hasError, data} = stateData;
 
     return (
     <>
@@ -36,9 +52,13 @@ function App() {
         <div className={styles.wrapper}>
             {isLoading && 'Загрузка...'}
             {hasError && 'Произошла ошибка'}
-            {!!state.data.length && <>
-                <BurgerIngredients data={data} />
-                <BurgerConstructor data={data} />
+            {!!data.length && <>
+                    <BurgerIngredients data={data} />
+                    <BurgerConstructorContext.Provider value={data}>
+                        <TotalPriceContext.Provider value={{totalPrice, setTotalPrice}}>
+                            <BurgerConstructor />
+                        </TotalPriceContext.Provider>
+                    </BurgerConstructorContext.Provider>
                 </>
             }
         </div>
