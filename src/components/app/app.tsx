@@ -4,7 +4,7 @@ import AppHeader from "../app-header/app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import { BURGER_API_URL, checkResponse } from "../../utils/burger-api";
-import {BurgerConstructorContext, TotalPriceContext} from "../../services/appContext";
+import { BurgerConstructorContext, TotalPriceContext } from "../../services/appContext";
 
 function App() {
 
@@ -52,9 +52,11 @@ function App() {
         <div className={styles.wrapper}>
             {isLoading && 'Загрузка...'}
             {hasError && 'Произошла ошибка'}
-            {!!data.length && <>
-                    <BurgerIngredients data={data} />
+            {!!data.length &&
+                <>
                     <BurgerConstructorContext.Provider value={data}>
+                        <BurgerIngredients />
+
                         <TotalPriceContext.Provider value={{totalPrice, setTotalPrice}}>
                             <BurgerConstructor />
                         </TotalPriceContext.Provider>

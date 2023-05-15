@@ -1,32 +1,22 @@
-import React, {useMemo, useState } from 'react';
+import React, {useMemo, useState, useContext } from 'react';
 import styles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientsElement from "../ingredients-element/ingredients-element";
 import Modal from '../modal/modal'
 import IngredientDetails from "../ingredient-details/ingredient-details";
-import PropTypes from "prop-types";
-import {data, ingredientTypes} from "../../utils/data";
+import { BurgerConstructorContext } from "../../services/appContext";
+import { useModal } from "../../hooks/useModal";
 
-function BurgerIngredients({data}) {
+function BurgerIngredients() {
     const [current, setCurrent] = useState('one');
-
-    const [openModal, setOpenModal] = useState(false);
     const [selectedElement, setSelectedElement] = useState(null);
 
-
-    const handlerCloseOverlayModal = (e) => {
-        if (e.currentTarget ===  e.target) {
-            setOpenModal(false);
-        }
-    }
-
-    const handlerCloseModal = () => {
-        setOpenModal(false);
-    }
+    const data = useContext(BurgerConstructorContext);
+    const { isModalOpen, openModal, closeModal } = useModal();
 
     const handlerOpen = (element) => {
         setSelectedElement(element);
-        setOpenModal(true);
+        openModal();
     }
 
     const buns = useMemo(() => data.filter((item) => item.type === 'bun'), [data]);
@@ -99,8 +89,8 @@ function BurgerIngredients({data}) {
                 </div>
             </div>
 
-            {openModal &&
-                <Modal onClose={handlerCloseModal} closeTarget={handlerCloseOverlayModal}>
+            {isModalOpen &&
+                <Modal onClose={closeModal}>
                     <IngredientDetails element={selectedElement} />
                 </Modal>
             }
@@ -108,9 +98,5 @@ function BurgerIngredients({data}) {
         </section>
     );
 }
-
-BurgerIngredients.propTypes = {
-    data: PropTypes.arrayOf(ingredientTypes.isRequired).isRequired
-};
 
 export default BurgerIngredients;

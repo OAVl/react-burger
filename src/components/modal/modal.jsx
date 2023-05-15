@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 const modalRoot = document.getElementById("react-modals");
 const ESC_KEYCODE = 27;
 
-const Modal = ({children, onClose, closeTarget}) => {
+const Modal = ({children, onClose}) => {
     useEffect(()=>{
         const handleESCClose = (e) => {if (e.keyCode === ESC_KEYCODE) {
             onClose();
@@ -21,7 +21,7 @@ const Modal = ({children, onClose, closeTarget}) => {
 
         return ReactDOM.createPortal(
              <>
-                <ModalOverlay onClose={closeTarget} />
+                <ModalOverlay onClose={onClose} />
                 <div className={styles.modal}>
                     {children}
                     <div className={styles.button} onClick={onClose}>
@@ -36,8 +36,7 @@ const Modal = ({children, onClose, closeTarget}) => {
 
 Modal.propTypes = {
     children: PropTypes.any.isRequired,
-    onClose: PropTypes.func.isRequired,
-    closeTarget: PropTypes.func.isRequired
+    onClose: PropTypes.func.isRequired
 };
 
 export default Modal;

@@ -10,25 +10,16 @@ import image from '../../images/Subtract.png'
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import { BurgerConstructorContext, TotalPriceContext } from "../../services/appContext";
-import { BURGER_API_URL } from "../../utils/burger-api";
+import {BURGER_API_URL, checkResponse} from "../../utils/burger-api";
+import { useModal } from "../../hooks/useModal";
 
 function BurgerConstructor() {
 
-    const [openModal, setOpenModal] = useState(false);
     const [numberOrder, setNumberOrder] = useState(0)
 
     const data = useContext(BurgerConstructorContext);
     const { totalPrice, setTotalPrice } = useContext( TotalPriceContext );
-
-    const handlerCloseOverlayModal = (e) => {
-        if (e.currentTarget ===  e.target) {
-            setOpenModal(false);
-        }
-    }
-
-    const handlerCloseModal = () => {
-        setOpenModal(false);
-    }
+    const { isModalOpen, openModal, closeModal } = useModal();
 
     function setData() {
         data.map((item) => {
@@ -40,13 +31,14 @@ function BurgerConstructor() {
                     })
                 }
             )
-                .then((response) => response.json())
+                .then(checkResponse)
                 .then(result => setNumberOrder(result.order.number))
                 .catch(e => {console.log(e)})
         })
     }
+
     const handlerOpenModal = () => {
-        setOpenModal(true);
+        openModal();
         setData()
     }
 
@@ -104,8 +96,8 @@ function BurgerConstructor() {
                         Оформить заказ
                     </Button>
 
-                    {openModal &&
-                        <Modal onClose={handlerCloseModal} closeTarget={handlerCloseOverlayModal}>
+                    {isModalOpen &&
+                        <Modal onClose={closeModal}>
                             <OrderDetails number={numberOrder} />
                         </Modal>
                     }

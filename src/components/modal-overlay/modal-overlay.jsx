@@ -3,8 +3,15 @@ import styles from './modal-overlay.module.css'
 import PropTypes from "prop-types";
 
 function ModalOverlay ({onClose}) {
+
+    const handlerCloseOverlayModal = (e) => {
+        if (e.currentTarget ===  e.target) {
+            onClose(false);
+        }
+    }
+
     return (
-        <div className={styles.container} onClick={onClose} ></div>
+        <div className={styles.container} onClick={handlerCloseOverlayModal} ></div>
     )
 }
 
