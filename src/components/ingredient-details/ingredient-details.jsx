@@ -1,6 +1,6 @@
 import React  from "react";
 import styles from './ingredient-details.module.css'
-import PropTypes from "prop-types";
+import { ingredientTypes } from "../../utils/types";
 
 const IngredientDetails = ({element}) => {
 
@@ -8,7 +8,7 @@ const IngredientDetails = ({element}) => {
         <section className={styles.container}>
             <h2 className="text text_type_main-large pt-3">Детали ингредиента</h2>
             <div className={styles.wrapper}>
-                <img src={element.image_large} alt="product" />
+                <img src={element.image_large} alt="картинка продукта" />
                 <p className="text text_type_main-medium mt-4 mb-8">{element.name}</p>
                 <ul className={styles.list}>
                     <li>
@@ -33,20 +33,8 @@ const IngredientDetails = ({element}) => {
     )
 }
 
-IngredientDetails:
-    PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        proteins: PropTypes.number.isRequired,
-        fat: PropTypes.number.isRequired,
-        carbohydrates: PropTypes.number.isRequired,
-        calories: PropTypes.number.isRequired,
-        price: PropTypes.number.isRequired,
-        image: PropTypes.string.isRequired,
-        image_mobile: PropTypes.string.isRequired,
-        image_large: PropTypes.string.isRequired,
-        __v: PropTypes.number.isRequired
-    });
+IngredientDetails.propTypes = {
+    element: ingredientTypes.isRequired
+};
 
 export default IngredientDetails;
