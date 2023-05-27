@@ -1,40 +1,38 @@
 import React  from "react";
 import styles from './ingredient-details.module.css'
-import { ingredientTypes } from "../../utils/types";
+import { useSelector } from "react-redux";
 
-const IngredientDetails = ({element}) => {
+const IngredientDetails = () => {
+
+    const currentIngredient = useSelector(state => state.ingredient.currentIngredient);
 
     return (
         <section className={styles.container}>
             <h2 className="text text_type_main-large pt-3">Детали ингредиента</h2>
             <div className={styles.wrapper}>
-                <img src={element.image_large} alt="картинка продукта" />
-                <p className="text text_type_main-medium mt-4 mb-8">{element.name}</p>
+                <img src={currentIngredient.image_large} alt="картинка продукта" />
+                <p className="text text_type_main-medium mt-4 mb-8">{currentIngredient.name}</p>
                 <ul className={styles.list}>
                     <li>
                         <p className="text text_type_main-default text_color_inactive">Калории,ккал</p>
-                        <p className="text text_type_main-default text_color_inactive">{element.calories}</p>
+                        <p className="text text_type_main-default text_color_inactive">{currentIngredient.calories}</p>
                     </li>
                     <li>
                         <p className="text text_type_main-default text_color_inactive">Белки, г</p>
-                        <p className="text text_type_main-default text_color_inactive">{element.proteins}</p>
+                        <p className="text text_type_main-default text_color_inactive">{currentIngredient.proteins}</p>
                     </li>
                     <li>
                         <p className="text text_type_main-default text_color_inactive">Жиры, г</p>
-                        <p className="text text_type_main-default text_color_inactive">{element.fat}</p>
+                        <p className="text text_type_main-default text_color_inactive">{currentIngredient.fat}</p>
                     </li>
                     <li>
                         <p className="text text_type_main-default text_color_inactive">Углеводы, г</p>
-                        <p className="text text_type_main-default text_color_inactive">{element.carbohydrates}</p>
+                        <p className="text text_type_main-default text_color_inactive">{currentIngredient.carbohydrates}</p>
                     </li>
                 </ul>
             </div>
         </section>
     )
 }
-
-IngredientDetails.propTypes = {
-    element: ingredientTypes.isRequired
-};
 
 export default IngredientDetails;

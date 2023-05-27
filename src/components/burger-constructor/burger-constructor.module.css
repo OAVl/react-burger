@@ -3,6 +3,44 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    border: 4px dashed transparent;
+}
+
+.listEmptyTop,
+.listEmptyBottom {
+    padding: 16px 40px;
+    display: inline-block;
+    border-radius: 88px 88px 40px 40px;
+    background: #1C1C21;
+    border: 4px dashed #2F2F37;
+    width: 100%;
+    min-height: 80px;
+    font-family: 'Jet Brains Mono';
+    font-size: 16px;
+    line-height: 24px;
+    color: #F2F2F3;
+    flex-grow: 1;
+    box-sizing: border-box;
+    margin: 0;
+    text-align: center;
+}
+
+.listEmptyBottom {
+    border-radius: 40px 40px 88px 88px ;
+}
+
+.listEmpty {
+    height: 300px;
+    width: 535px;
+    border: 4px dashed #2F2F37;
+    padding: 5px;
+    background: #1C1C21;
+    font-family: 'Jet Brains Mono';
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
 }
 
 .list {
@@ -11,6 +49,7 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    min-width: 585px;
 }
 
 .list::-webkit-scrollbar {
@@ -39,4 +78,8 @@
     display: flex;
     align-items: center;
     gap: 9px;
+}
+
+.onHover {
+    opacity: 0.6;
 }
