@@ -7,7 +7,8 @@ import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import { useModal } from "../../hooks/useModal";
 import { useDispatch, useSelector } from "react-redux";
-import { ADD_BUN_COUNT, ADD_INGREDIENT_COUNT, DELETE_BUN_COUNT, setIngredient } from "../../services/actions/ingredients";
+import { setIngredient } from "../../services/actions/set-ingredients";
+import { ADD_BUN_COUNT, ADD_INGREDIENT_COUNT, DELETE_BUN_COUNT } from "../../services/actions/get-ingredients";
 import { ADD_BUN, ADD_INGREDIENT, TOTAL_PRICE } from "../../services/actions/burger-constructor"
 import { useDrop } from "react-dnd";
 import uuid from 'react-uuid';
@@ -17,7 +18,9 @@ function BurgerConstructor() {
 
     const { isModalOpen, openModal, closeModal } = useModal();
     const dispatch = useDispatch();
-    const { bun, listIngredientsConstructor, total} = useSelector(state => state.burgerConstructor);
+    const bun = useSelector(state => state.burgerConstructor.bun);
+    const listIngredientsConstructor = useSelector(state => state.burgerConstructor.listIngredientsConstructor);
+    const total = useSelector(state => state.burgerConstructor.total);
 
     const handleDrop = useCallback((item) => {
         if (item.type === "bun") {
@@ -73,15 +76,13 @@ function BurgerConstructor() {
         }),
     });
 
-    function setData() {
-        listIngredientsConstructor.map((item) => {
-            dispatch(setIngredient(item))
-        })
-    }
+    const setData = useCallback(() => {
+        dispatch(setIngredient(listIngredientsConstructor, bun))
+    }, [dispatch, bun, listIngredientsConstructor])
 
     const handlerOpenModal = () => {
         openModal();
-        setData()
+        setData();
     }
 
     useEffect(() => {
@@ -145,7 +146,7 @@ function BurgerConstructor() {
                     <img src={image} alt='icon' />
                 </div>
                 <div>
-                    <Button htmlType="button" type="primary" size="medium" onClick={handlerOpenModal}>
+                    <Button htmlType="button" type="primary" size="medium" onClick={handlerOpenModal} disabled={!bun && true}>
                         Оформить заказ
                     </Button>
 
@@ -158,7 +159,6 @@ function BurgerConstructor() {
 
             </div>
         </section>
-
     );
 }
 

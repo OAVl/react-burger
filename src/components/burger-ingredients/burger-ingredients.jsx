@@ -5,7 +5,7 @@ import IngredientsElement from "../ingredients-element/ingredients-element";
 import Modal from '../modal/modal'
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import { useModal } from "../../hooks/useModal";
-import { CURRENT_INGREDIENT, getItems } from "../../services/actions/ingredients";
+import { CURRENT_INGREDIENT } from "../../services/actions/current-ingredient";
 import { useSelector, useDispatch } from 'react-redux';
 import { useInView } from "react-intersection-observer";
 
@@ -14,11 +14,7 @@ function BurgerIngredients() {
     const { isModalOpen, openModal, closeModal } = useModal();
 
     const dispatch = useDispatch();
-    const data = useSelector(state => state.ingredient.listIngredients);
-
-    useEffect(() => {
-        dispatch(getItems())
-    }, [dispatch])
+    const data = useSelector(state => state.getIngredient.listIngredients);
 
     const handlerOpen = (element) => {
         dispatch({

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 const IngredientDetails = () => {
 
-    const currentIngredient = useSelector(state => state.ingredient.currentIngredient);
+    const currentIngredient = useSelector(state => state.currentIngredients.currentIngredient);
 
     return (
         <section className={styles.container}>

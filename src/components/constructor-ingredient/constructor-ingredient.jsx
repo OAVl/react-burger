@@ -5,7 +5,7 @@ import uuid from "react-uuid";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./constructor-ingredient.module.css";
 import { useDrag, useDrop } from "react-dnd";
-import { DELETE_INGREDIENT_COUNT } from "../../services/actions/ingredients";
+import { DELETE_INGREDIENT_COUNT } from "../../services/actions/get-ingredients";
 
 function ConstructorIngredient({element, index}) {
 

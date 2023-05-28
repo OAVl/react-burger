@@ -1,31 +1,21 @@
 import {
-    LIST_INGREDIENTS_REQUEST,
-    LIST_INGREDIENTS_SUCCESS,
     LIST_INGREDIENTS_FAILED,
     LIST_INGREDIENTS_FINALLY,
-    CURRENT_INGREDIENT,
-    CREATED_ORDER_REQUEST,
-    CREATED_ORDER_SUCCESS,
-    CREATED_ORDER_FAILED,
+    LIST_INGREDIENTS_REQUEST,
+    LIST_INGREDIENTS_SUCCESS,
     ADD_INGREDIENT_COUNT,
     DELETE_INGREDIENT_COUNT,
     ADD_BUN_COUNT,
     DELETE_BUN_COUNT
-} from '../actions/ingredients';
+} from "../actions/get-ingredients";
 
 export const initialState = {
     listIngredients: [],
     listIngredientsRequest: false,
-    listIngredientsFailed: false,
-
-    currentIngredient: {},
-
-    createdOrder: 0,
-    createdOrderRequest: false,
-    createdOrderFailed: false,
+    listIngredientsFailed: false
 }
 
-export const ingredientReducer = (state = initialState, action) => {
+export const getIngredientReducer = (state = initialState, action) => {
     switch (action.type) {
         case LIST_INGREDIENTS_REQUEST: {
             return {...state, listIngredientsRequest: true}
@@ -38,21 +28,6 @@ export const ingredientReducer = (state = initialState, action) => {
         }
         case LIST_INGREDIENTS_FINALLY: {
             return {...state, listIngredientsRequest: false}
-        }
-        case CREATED_ORDER_REQUEST: {
-            return {...state, createdOrderRequest: true}
-        }
-        case CREATED_ORDER_SUCCESS: {
-            return {...state, createdOrderRequest: false, createdOrderFailed: false, createdOrder: action.items}
-        }
-        case CREATED_ORDER_FAILED: {
-            return {...state, createdOrderRequest: false, createdOrderFailed: true}
-        }
-        case CURRENT_INGREDIENT: {
-            return {
-                ...state,
-                currentIngredient: action.payload
-            }
         }
         case ADD_INGREDIENT_COUNT: {
             return {

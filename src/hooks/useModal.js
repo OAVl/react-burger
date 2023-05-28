@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { CURRENT_INGREDIENT } from "../services/actions/ingredients";
+import { CURRENT_INGREDIENT } from "../services/actions/current-ingredient";
 
 export const useModal = () => {
 
