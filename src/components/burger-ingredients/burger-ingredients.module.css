@@ -42,3 +42,12 @@
     grid-template-columns: 1fr 1fr;
     gap: 24px;
 }
+
+.listNav {
+    list-style: none;
+    display: flex;
+}
+
+.item {
+    position: relative;
+}
