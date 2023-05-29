@@ -13,8 +13,7 @@ export function setIngredient(items, item) {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    "ingredients1": items.map((el) => el.id),
-                    "ingredients": item.id
+                    "ingredients": [...items.map((el) => el.id), item.id]
                 })
             }
         )
